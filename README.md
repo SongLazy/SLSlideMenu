@@ -2,15 +2,16 @@
 一句代码上/下/左/右弹出菜单
 
 
-    将SLSlideMenu.h和SLSlideMenu.m拖入项目
+    SLSlideMenu
+    将SLSlideMenu文件夹拖入项目
     调用
     1> #import "SLSlideMenu.h"
-    2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
+    2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft       slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
      或者在viewdidload中：
        [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuSwipeDirectionLeft slideOffset:300 allowSlideMenuSwipeShow:YES allowSwipeCloseMenu:YES aboveNav:YES];
     自定义menu控件：
     1> 遵守协议<SLSlideMenuProtocol>
-    2> 实现代理方法：讲子控件添加到menuView
+    2> 实现代理方法：将子控件添加到menuView
      - (void)slideMenu:(SLSlideMenu *)slideMenu prepareSubviewsForMenuView:(UIView *)menuView {
      UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 100, 30)];
      lb.text = @"自定义控件";
