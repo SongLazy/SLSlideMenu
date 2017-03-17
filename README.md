@@ -2,10 +2,11 @@
 一句代码上/下/左/右弹出菜单
 
 
-    将SLSlideMenu文件夹拖入项目
+    SLSlideMenu
+    将SLSlideMenu文件夹拖入项目
     调用
     1> #import "SLSlideMenu.h"
-    2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
+    2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft       slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
      或者在viewdidload中：
        [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuSwipeDirectionLeft slideOffset:300 allowSlideMenuSwipeShow:YES allowSwipeCloseMenu:YES aboveNav:YES];
     自定义menu控件：
