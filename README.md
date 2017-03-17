@@ -63,5 +63,13 @@
 *param aboveNav 是否盖住nav
 *param identifier 标识符 可以通过设置进行唯一标识
 */
-+ (void)slideMenuWithFrame:(CGRect)frame delegate:(id <SLSlideMenuProtocol> )delegate direction:(SLSlideMenuDirection)direction slideOffset:(CGFloat)slideOffset allowSwipeCloseMenu:(BOOL)isAllow aboveNav:(BOOL)isAbove identifier:(NSString * )identifier;
++ (void)prepareSlideMenuWithFrame:(CGRect)frame
+                         delegate:(id <SLSlideMenuProtocol> )delegate
+                        direction:(SLSlideMenuSwipeDirection)direction
+                      slideOffset:(CGFloat)slideOffset
+          allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow
+              allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu
+                         aboveNav:(BOOL)isAbove
+                       identifier:(NSString *)identifier;
+
 ```
