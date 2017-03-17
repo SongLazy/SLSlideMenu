@@ -3,12 +3,12 @@
 
 
     
-#使用说明
-###安装
+使用说明
+安装
     将SLSlideMenu文件夹拖入项目
     
-###调用
-    ```
+调用
+    
     1> #import "SLSlideMenu.h"
     2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft       slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
      或者在viewdidload中：
@@ -24,10 +24,10 @@
      [menuView addSubview:lb];
     }
     
-    ```
+    
     
-###接口说明
-      ```
+接口说明
+      
         1>
         /**
          * 配置menu视图。可在viewdidload中，此种方式可通过左滑右滑手势呼出。
