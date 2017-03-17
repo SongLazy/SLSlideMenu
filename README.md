@@ -43,6 +43,33 @@
     [menuView addSubview:lb];
  }
 ```   
+在自定义子控件时
+如果一个方向只有一个弹窗可根据direction区分menu
+```Objective-C
+if (slideMenu.direction == SLSlideMenuDirectionTop) {
+    UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, 100, 30)];
+    lb.text = @"自定义控件1";
+    lb.font = [UIFont systemFontOfSize:12];
+    lb.textColor = [UIColor darkGrayColor];
+    [menuView addSubview:lb];
+}
+
+if (slideMenu.direction == SLSlideMenuDirectionBottom) {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(70, 200, 100, 40)];
+    btn.backgroundColor = [UIColor purpleColor];
+    [btn addTarget:self  action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    [menuView addSubview:btn];
+}
+```
+如果一个方向有多个弹窗，可设置identifier来区分menu
+```Objective-C
+if ([slideMenu.identifier isEqualToString:@"left"]) {
+    menuView.backgroundColor = [UIColor yellowColor];
+}
+if ([slideMenu.identifier isEqualToString:@"swipeLeft"]) {
+    menuView.backgroundColor = [UIColor greenColor];
+}
+```
 
 ## 接口说明
 
