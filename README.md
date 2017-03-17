@@ -30,7 +30,7 @@
                                   aboveNav:YES
                                 identifier:@"swipeLeft"];
 ```
-### 自定义menu控件：
+### 自定义menu子控件：
 
 ```Objective-C
 1> 遵守协议<SLSlideMenuProtocol>
