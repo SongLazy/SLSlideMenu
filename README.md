@@ -1,13 +1,15 @@
 # SLSlideMenu
 一句代码上/下/左/右弹出菜单
-
-
+## 效果图
+![SLSlideMenu](http://upload-images.jianshu.io/upload_images/1733477-d67eb45b36d64eee.gif?imageMogr2/auto-orient/strip) 
     
-使用说明
-安装
+## 使用说明
+
+### 安装
+
     将SLSlideMenu文件夹拖入项目
     
-调用
+### 调用
     
     1> #import "SLSlideMenu.h"
     2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft       slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
@@ -25,8 +27,8 @@
     }
     
     
-    
-接口说明
+    
+## 接口说明
       
         1>
         /**
