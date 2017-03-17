@@ -13,9 +13,22 @@
 
 ```Objective-C
 1> #import "SLSlideMenu.h"
-2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft       slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
+2> [SLSlideMenu slideMenuWithFrame:self.view.frame
+                           delegate:self
+                          direction:SLSlideMenuDirectionLeft
+                        slideOffset:250
+                allowSwipeCloseMenu:YES
+                           aboveNav:YES
+                         identifier:@"left"];
    或者在viewdidload中：
-   [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuSwipeDirectionLeft slideOffset:300 allowSlideMenuSwipeShow:YES allowSwipeCloseMenu:YES aboveNav:YES];
+   [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame
+                                  delegate:self
+                                 direction:SLSlideMenuSwipeDirectionLeft
+                               slideOffset:300
+                   allowSlideMenuSwipeShow:YES
+                       allowSwipeCloseMenu:YES
+                                  aboveNav:YES
+                                identifier:@"swipeLeft"];
 ```
 ### 自定义menu控件：
 
@@ -33,7 +46,7 @@
 
 ## 接口说明
 
-####  点击弹出的场景
+####  手势滑出的场景
 
 ```Objective-C
 /**
@@ -47,10 +60,17 @@
 *param aboveNav 是否盖住nav
 *param identifier 标识符 可以通过设置进行唯一标识
 */
-+ (void)prepareSlideMenuWithFrame:(CGRect)frame delegate:(id <SLSlideMenuProtocol> )delegate direction:(SLSlideMenuSwipeDirection)direction slideOffset:(CGFloat)slideOffset allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu aboveNav:(BOOL)isAbove identifier:(NSString *)identifier;
++ (void)prepareSlideMenuWithFrame:(CGRect)frame
+                         delegate:(id <SLSlideMenuProtocol> )delegate
+                        direction:(SLSlideMenuSwipeDirection)direction
+                      slideOffset:(CGFloat)slideOffset
+          allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow
+              allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu
+                         aboveNav:(BOOL)isAbove
+                       identifier:(NSString *)identifier;
 ```
 
-####  手势滑出的场景
+####  点击弹出的场景
 
 ```Objective-C
 /**
@@ -63,13 +83,11 @@
 *param aboveNav 是否盖住nav
 *param identifier 标识符 可以通过设置进行唯一标识
 */
-+ (void)prepareSlideMenuWithFrame:(CGRect)frame
-                         delegate:(id <SLSlideMenuProtocol> )delegate
-                        direction:(SLSlideMenuSwipeDirection)direction
-                      slideOffset:(CGFloat)slideOffset
-          allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow
-              allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu
-                         aboveNav:(BOOL)isAbove
-                       identifier:(NSString *)identifier;
-
++ (void)slideMenuWithFrame:(CGRect)frame
+                  delegate:(id <SLSlideMenuProtocol> )delegate
+                 direction:(SLSlideMenuDirection)direction
+               slideOffset:(CGFloat)slideOffset
+       allowSwipeCloseMenu:(BOOL)isAllow
+                  aboveNav:(BOOL)isAbove
+                identifier:(NSString * )identifier;
 ```
