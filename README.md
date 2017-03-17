@@ -2,9 +2,13 @@
 一句代码上/下/左/右弹出菜单
 
 
-    SLSlideMenu
+    
+#使用说明
+###安装
     将SLSlideMenu文件夹拖入项目
-    调用
+    
+###调用
+    ```
     1> #import "SLSlideMenu.h"
     2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft       slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
      或者在viewdidload中：
@@ -20,9 +24,11 @@
      [menuView addSubview:lb];
     }
     
+    ```
     
-    调用接口
-    1>
+###接口说明
+      ```
+        1>
         /**
          * 配置menu视图。可在viewdidload中，此种方式可通过左滑右滑手势呼出。
          *param frame 如果不要盖住nav 就传self.view.frame；如果要盖住nav就传CGRectMake(0, 64, screenW, screenH)
@@ -36,7 +42,7 @@
          */
         + (void)prepareSlideMenuWithFrame:(CGRect)frame delegate:(id <SLSlideMenuProtocol> )delegate direction:(SLSlideMenuSwipeDirection)direction slideOffset:(CGFloat)slideOffset allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu aboveNav:(BOOL)isAbove identifier:(NSString *)identifier;
         
-    2>
+         2>
         /**
          * 创建menu视图。此方式一般用在点击弹出的场景，不支持手势滑出。
          *param frame 如果不要盖住nav 就传self.view.frame；如果要盖住nav就传CGRectMake(0, 64, screenW, screenH)
@@ -48,3 +54,4 @@
          *param identifier 标识符 可以通过设置进行唯一标识
          */
         + (void)slideMenuWithFrame:(CGRect)frame delegate:(id <SLSlideMenuProtocol> )delegate direction:(SLSlideMenuDirection)direction slideOffset:(CGFloat)slideOffset allowSwipeCloseMenu:(BOOL)isAllow aboveNav:(BOOL)isAbove identifier:(NSString * )identifier;
+        ```
