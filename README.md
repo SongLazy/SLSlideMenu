@@ -17,7 +17,6 @@
    或者在viewdidload中：
    [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuSwipeDirectionLeft slideOffset:300 allowSlideMenuSwipeShow:YES allowSwipeCloseMenu:YES aboveNav:YES];
 ```
-
 ### 自定义menu控件：
 
 ```Objective-C
@@ -31,10 +30,9 @@
     [menuView addSubview:lb];
  }
 ```   
-    
-    
+
 ## 接口说明
-      
+
 ####  点击弹出的场景
 
 ```Objective-C
