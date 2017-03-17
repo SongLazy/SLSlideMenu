@@ -9,7 +9,7 @@
 /**
     
     SLSlideMenu
-    将SLSlideMenu.h和SLSlideMenu.m拖入项目
+    将SLSlideMenu文件夹拖入项目
     调用
     1> #import "SLSlideMenu.h"
     2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
