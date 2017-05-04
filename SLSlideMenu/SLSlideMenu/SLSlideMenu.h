@@ -6,16 +6,33 @@
 //  Copyright © 2017年 Songlazy All rights reserved.
 //
 
-/**
-    
-    SLSlideMenu
+
+/*
+ 
     将SLSlideMenu文件夹拖入项目
+ 
     调用
+ 
     1> #import "SLSlideMenu.h"
-    2> [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionLeft slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO];
-     或者在viewdidload中：
-       [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuSwipeDirectionLeft slideOffset:300 allowSlideMenuSwipeShow:YES allowSwipeCloseMenu:YES aboveNav:YES];
-    自定义menu控件：
+    2> [SLSlideMenu slideMenuWithFrame:self.view.frame
+                              delegate:self
+                             direction:SLSlideMenuDirectionLeft
+                           slideOffset:250
+                   allowSwipeCloseMenu:YES
+                              aboveNav:YES
+                            identifier:@"left"];
+    或者在viewdidload中：
+    [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame
+                                  delegate:self
+                                 direction:SLSlideMenuSwipeDirectionLeft
+                               slideOffset:300
+                   allowSlideMenuSwipeShow:YES
+                       allowSwipeCloseMenu:YES
+                                  aboveNav:YES
+                                identifier:@"swipeLeft"];
+ 
+    自定义menu子控件：
+ 
     1> 遵守协议<SLSlideMenuProtocol>
     2> 实现代理方法：将子控件添加到menuView
      - (void)slideMenu:(SLSlideMenu *)slideMenu prepareSubviewsForMenuView:(UIView *)menuView {
@@ -56,7 +73,6 @@ typedef NS_ENUM(NSUInteger, SLSlideMenuSwipeDirection) {
  *param slideMenu slideMenu
  *param menuView 将子控件添加到menuView
  */
-
 - (void)slideMenu:(SLSlideMenu *)slideMenu prepareSubviewsForMenuView:(UIView *)menuView;
 
 @end
@@ -66,6 +82,7 @@ typedef NS_ENUM(NSUInteger, SLSlideMenuSwipeDirection) {
 @property (nonatomic, weak) id<SLSlideMenuProtocol> delegate;
 @property (nonatomic, assign) SLSlideMenuDirection direction;
 @property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, strong) id object;
 
 /**
  * 配置menu视图。可在viewdidload中，此种方式可通过左滑右滑手势呼出。
@@ -77,8 +94,17 @@ typedef NS_ENUM(NSUInteger, SLSlideMenuSwipeDirection) {
  *param allowSwipeCloseMenu 是否允许手势关闭
  *param aboveNav 是否盖住nav
  *param identifier 标识符 可以通过设置进行唯一标识
+ *param object 可通过object传参
  */
-+ (void)prepareSlideMenuWithFrame:(CGRect)frame delegate:(id <SLSlideMenuProtocol> )delegate direction:(SLSlideMenuSwipeDirection)direction slideOffset:(CGFloat)slideOffset allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu aboveNav:(BOOL)isAbove identifier:(NSString *)identifier;
++ (void)prepareSlideMenuWithFrame:(CGRect)frame
+                         delegate:(id <SLSlideMenuProtocol> )delegate
+                        direction:(SLSlideMenuSwipeDirection)direction
+                      slideOffset:(CGFloat)slideOffset
+          allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow
+              allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu
+                         aboveNav:(BOOL)isAbove
+                       identifier:(NSString *)identifier
+                             object:(id)object;
 
 /**
  * 创建menu视图。此方式一般用在点击弹出的场景，不支持手势滑出。
@@ -89,7 +115,17 @@ typedef NS_ENUM(NSUInteger, SLSlideMenuSwipeDirection) {
  *param allowSwipeCloseMenu 是否允许手势关闭
  *param aboveNav 是否盖住nav
  *param identifier 标识符 可以通过设置进行唯一标识
+ *param object 可通过object传参
  */
-+ (void)slideMenuWithFrame:(CGRect)frame delegate:(id <SLSlideMenuProtocol> )delegate direction:(SLSlideMenuDirection)direction slideOffset:(CGFloat)slideOffset allowSwipeCloseMenu:(BOOL)isAllow aboveNav:(BOOL)isAbove identifier:(NSString * )identifier;
++ (void)slideMenuWithFrame:(CGRect)frame
+                  delegate:(id <SLSlideMenuProtocol> )delegate
+                 direction:(SLSlideMenuDirection)direction
+               slideOffset:(CGFloat)slideOffset
+       allowSwipeCloseMenu:(BOOL)isAllow
+                  aboveNav:(BOOL)isAbove
+                identifier:(NSString * )identifier
+                      object:(id)object;
+// 消失
++ (void)dismiss;
 
 @end

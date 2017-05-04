@@ -36,20 +36,23 @@
 
 @property (nonatomic, assign) CGFloat shadowY;
 
+
+
 @end
 
 @implementation SLSlideMenu
 
-
-
-+ (void)slideMenuWithFrame:(CGRect)frame delegate:(id)delegate direction:(SLSlideMenuDirection)direction slideOffset:(CGFloat)slideOffset allowSwipeCloseMenu:(BOOL)isAllow aboveNav:(BOOL)isAbove identifier:(NSString *)identifier {
-    
-    SLSlideMenu *menu = [[SLSlideMenu alloc] initWithFrame:frame delegate:(id)delegate direction:direction slideOffset:slideOffset allowSwipeCloseMenu:isAllow aboveNav:(BOOL)isAbove identifier:identifier];
-    [[menu getCurrentView] addSubview:menu];
-    
++ (void)dismiss {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"dismissSLSLideMenu" object:nil];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id)delegate direction:(SLSlideMenuDirection)direction slideOffset:(CGFloat)slideOffset allowSwipeCloseMenu:(BOOL)isAllow aboveNav:(BOOL)isAbove identifier:(NSString *)identifier {
++ (void)slideMenuWithFrame:(CGRect)frame delegate:(id)delegate direction:(SLSlideMenuDirection)direction slideOffset:(CGFloat)slideOffset allowSwipeCloseMenu:(BOOL)isAllow aboveNav:(BOOL)isAbove identifier:(NSString *)identifier object:(id)object{
+    
+    SLSlideMenu *menu = [[SLSlideMenu alloc] initWithFrame:frame delegate:(id)delegate direction:direction slideOffset:slideOffset allowSwipeCloseMenu:isAllow aboveNav:(BOOL)isAbove identifier:identifier object:object];
+    [[menu getCurrentView] addSubview:menu];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id)delegate direction:(SLSlideMenuDirection)direction slideOffset:(CGFloat)slideOffset allowSwipeCloseMenu:(BOOL)isAllow aboveNav:(BOOL)isAbove identifier:(NSString *)identifier object:(id)object {
     self = [super initWithFrame:frame];
     if (self) {
         
@@ -60,6 +63,7 @@
         _y_arr = [NSMutableArray array];
         _startX_arr =  [NSMutableArray array];
         _startY_arr =  [NSMutableArray array];
+        _object = object;
         
         CGFloat shadowY;
         if (isAbove) {
@@ -119,7 +123,7 @@
     return self;
 }
 
-+ (void)prepareSlideMenuWithFrame:(CGRect)frame delegate:(id)delegate direction:(SLSlideMenuSwipeDirection)direction slideOffset:(CGFloat)slideOffset allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu aboveNav:(BOOL)isAbove identifier:(NSString *)identifier{
++ (void)prepareSlideMenuWithFrame:(CGRect)frame delegate:(id)delegate direction:(SLSlideMenuSwipeDirection)direction slideOffset:(CGFloat)slideOffset allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu aboveNav:(BOOL)isAbove identifier:(NSString *)identifier object:(id)object{
     if (isAllowSwipeShow) {
 
         SLScreenEdgePanGestureRecognizer* screenEdgePan = [[SLScreenEdgePanGestureRecognizer alloc] init];
@@ -152,7 +156,7 @@
     if (sender.edges == UIRectEdgeLeft || sender.edges == UIRectEdgeRight) {
         if (sender.state == UIGestureRecognizerStateBegan) {
             NSLog(@"手势开始");
-            [SLSlideMenu slideMenuWithFrame:CGRectFromString(sender.userInfo[@"frame"]) delegate:sender.userInfo[@"delegate"] direction:[sender.userInfo[@"direction"] integerValue] slideOffset:[sender.userInfo[@"slideOffset"] floatValue] allowSwipeCloseMenu:[sender.userInfo[@"allowSwipeCloseMenu"] boolValue] aboveNav:[sender.userInfo[@"isAbove"] boolValue] identifier:sender.userInfo[@"identifier"]];
+            [SLSlideMenu slideMenuWithFrame:CGRectFromString(sender.userInfo[@"frame"]) delegate:sender.userInfo[@"delegate"] direction:[sender.userInfo[@"direction"] integerValue] slideOffset:[sender.userInfo[@"slideOffset"] floatValue] allowSwipeCloseMenu:[sender.userInfo[@"allowSwipeCloseMenu"] boolValue] aboveNav:[sender.userInfo[@"isAbove"] boolValue] identifier:sender.userInfo[@"identifier"] object:sender.userInfo[@"object"]];
         } else if (sender.state == UIGestureRecognizerStateChanged) {
             NSLog(@"手势进行中");
         } else {
@@ -230,11 +234,17 @@
     } completion:^(BOOL finished) {
         
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissNoti) name:@"dismissSLSLideMenu" object:nil];
+}
+
+- (void)dismissNoti {
+    [self shadowViewDidClick:nil];
 }
 
 - (void)shadowViewDidClick:(UIButton *)sender {
     
-    NSLog(@"shadowViewDidClick");
+    
     
     CGRect frame = self.menuView.frame;
     
@@ -280,8 +290,8 @@
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
         [self.shadowView removeFromSuperview];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"dismissSLSLideMenu" object:nil];
     }];
-    
 }
 
 - (void)addGestureRecognizerForMenuView:(UIView *)menuView direction:(SLSlideMenuDirection)direction {

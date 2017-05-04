@@ -11,6 +11,9 @@
 
 @interface ViewController () <SLSlideMenuProtocol>
 
+@property (nonatomic, strong) NSDictionary *dic;
+
+
 @end
 
 @implementation ViewController
@@ -18,44 +21,63 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuSwipeDirectionLeft slideOffset:300 allowSlideMenuSwipeShow:YES allowSwipeCloseMenu:YES aboveNav:YES identifier:@"swipeLeft"];
-    [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuSwipeDirectionRight slideOffset:300 allowSlideMenuSwipeShow:YES allowSwipeCloseMenu:YES aboveNav:YES identifier:@"swipeRight"];
+    NSDictionary *dic = @{@"key":@"test"};
+    _dic = dic;
+    [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame
+                                  delegate:self
+                                 direction:SLSlideMenuSwipeDirectionLeft
+                               slideOffset:300
+                   allowSlideMenuSwipeShow:YES
+                       allowSwipeCloseMenu:YES
+                                  aboveNav:YES
+                                identifier:@"swipeLeft" object:_dic];
+    [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuSwipeDirectionRight slideOffset:300 allowSlideMenuSwipeShow:YES allowSwipeCloseMenu:YES aboveNav:YES identifier:@"swipeRight" object:_dic];
     
 }
 
 - (IBAction)topClick:(id)sender {
     NSLog(@"topClick");
 
-    [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionTop slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO identifier:@"top"];
+    [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionTop slideOffset:400 allowSwipeCloseMenu:YES aboveNav:NO identifier:@"top" object:_dic];
 }
 
 - (IBAction)bottomClick:(id)sender {
     NSLog(@"bottomClick");
 
-    [SLSlideMenu slideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuDirectionBottom slideOffset:400 allowSwipeCloseMenu:YES aboveNav:YES identifier:@"bottom"];
+    [SLSlideMenu slideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuDirectionBottom slideOffset:400 allowSwipeCloseMenu:YES aboveNav:YES identifier:@"bottom" object:_dic];
 }
 
 - (IBAction)rightClick:(id)sender {
     NSLog(@"rightClick");
 
-    [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionRight slideOffset:250 allowSwipeCloseMenu:YES aboveNav:NO identifier:@"right"];
+    [SLSlideMenu slideMenuWithFrame:CGRectMake(0, 64, screenW, screenH) delegate:self direction:SLSlideMenuDirectionRight slideOffset:250 allowSwipeCloseMenu:YES aboveNav:NO identifier:@"right" object:_dic];
 }
 
 - (IBAction)leftClick:(id)sender {
     NSLog(@"leftClick");
     
-    [SLSlideMenu slideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuDirectionLeft slideOffset:250 allowSwipeCloseMenu:YES aboveNav:YES identifier:@"left"];
+    [SLSlideMenu slideMenuWithFrame:self.view.frame
+                           delegate:self
+                          direction:SLSlideMenuDirectionLeft
+                        slideOffset:250
+                allowSwipeCloseMenu:YES
+                           aboveNav:YES
+                         identifier:@"left" object:_dic];
 }
 
 - (IBAction)menuBtnClick:(id)sender {
     
     NSLog(@"menuBtnClick");
 
-    [SLSlideMenu slideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuDirectionRight slideOffset:250 allowSwipeCloseMenu:YES aboveNav:YES identifier:@"right1"];
+    [SLSlideMenu slideMenuWithFrame:self.view.frame delegate:self direction:SLSlideMenuDirectionRight slideOffset:250 allowSwipeCloseMenu:YES aboveNav:YES identifier:@"right1" object:_dic];
 }
 
 - (void)slideMenu:(SLSlideMenu *)slideMenu prepareSubviewsForMenuView:(UIView *)menuView {
     NSLog(@"identifier:%@",slideMenu.identifier);
+    
+    // 可以通过 slideMenu.object 获取传进来的参数
+//    NSLog(@"object: %@",slideMenu.object);
+    
     // ** 如果一个方向只有一个弹窗可根据direction区分
     if (slideMenu.direction == SLSlideMenuDirectionTop) {
         UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, 100, 30)];
@@ -100,7 +122,10 @@
     }
     
     if (slideMenu.direction == SLSlideMenuDirectionBottom) {
+        // 可以通过 slideMenu.object 获取传进来的参数
+        NSLog(@"object: %@",slideMenu.object);
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(70, 200, 100, 40)];
+        [btn setTitle:@"dismiss" forState:UIControlStateNormal];
         btn.backgroundColor = [UIColor purpleColor];
         [btn addTarget:self  action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
         [menuView addSubview:btn];
@@ -120,7 +145,8 @@
 }
 
 - (void)btnClick {
-    NSLog(@"btnClick");
+    // 可以调用dismiss方法让menu消失
+    [SLSlideMenu dismiss];
 }
 
 - (void)didReceiveMemoryWarning {
