@@ -19,7 +19,8 @@
                         slideOffset:250
                 allowSwipeCloseMenu:YES
                            aboveNav:YES
-                         identifier:@"left"];
+                         identifier:@"left"
+                             object:yourObject];
    或者在viewdidload中：
    [SLSlideMenu prepareSlideMenuWithFrame:self.view.frame
                                   delegate:self
@@ -28,7 +29,11 @@
                    allowSlideMenuSwipeShow:YES
                        allowSwipeCloseMenu:YES
                                   aboveNav:YES
-                                identifier:@"swipeLeft"];
+                                identifier:@"swipeLeft"
+                                    object:yourObject];
+                                    
+3> // 可以调用dismiss方法让menu消失
+    [SLSlideMenu dismiss];
 ```
 ### 自定义menu子控件：
 
@@ -36,6 +41,10 @@
 1> 遵守协议<SLSlideMenuProtocol>
 2> 实现代理方法：将子控件添加到menuView
  - (void)slideMenu:(SLSlideMenu *)slideMenu prepareSubviewsForMenuView:(UIView *)menuView {
+ 
+    // 可以通过 slideMenu.object 获取传进来的参数
+    NSLog(@"object: %@",slideMenu.object);
+    
     UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(20, 50, 100, 30)];
     lb.text = @"自定义控件";
     lb.font = [UIFont systemFontOfSize:12];
@@ -86,6 +95,7 @@ if ([slideMenu.identifier isEqualToString:@"swipeLeft"]) {
 *param allowSwipeCloseMenu 是否允许手势关闭
 *param aboveNav 是否盖住nav
 *param identifier 标识符 可以通过设置进行唯一标识
+*param object 可通过object给menu传参，可以在代理方法中通过 slideMenu.object 获取传进来的参数
 */
 + (void)prepareSlideMenuWithFrame:(CGRect)frame
                          delegate:(id <SLSlideMenuProtocol> )delegate
@@ -94,7 +104,8 @@ if ([slideMenu.identifier isEqualToString:@"swipeLeft"]) {
           allowSlideMenuSwipeShow:(BOOL)isAllowSwipeShow
               allowSwipeCloseMenu:(BOOL)isAllowSwipeCloseMenu
                          aboveNav:(BOOL)isAbove
-                       identifier:(NSString *)identifier;
+                       identifier:(NSString *)identifier
+                           object:(id)object;
 ```
 
 ####  点击弹出的场景
@@ -109,6 +120,7 @@ if ([slideMenu.identifier isEqualToString:@"swipeLeft"]) {
 *param allowSwipeCloseMenu 是否允许手势关闭
 *param aboveNav 是否盖住nav
 *param identifier 标识符 可以通过设置进行唯一标识
+*param object 可通过object给menu传参，可以在代理方法中通过 slideMenu.object 获取传进来的参数
 */
 + (void)slideMenuWithFrame:(CGRect)frame
                   delegate:(id <SLSlideMenuProtocol> )delegate
@@ -116,5 +128,12 @@ if ([slideMenu.identifier isEqualToString:@"swipeLeft"]) {
                slideOffset:(CGFloat)slideOffset
        allowSwipeCloseMenu:(BOOL)isAllow
                   aboveNav:(BOOL)isAbove
-                identifier:(NSString * )identifier;
+                identifier:(NSString * )identifier
+                    object:(id)object;
+```
+
+####  消失
+```Objective-C
+// 消失  可以手动调用dismiss
++ (void)dismiss;
 ```
