@@ -17,6 +17,7 @@
 		DA314FBE1E77E8F100526C5C /* SLSlideMenuUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DA314FBD1E77E8F100526C5C /* SLSlideMenuUITests.m */; };
 		DAC58F401E7A8F96009AE51A /* SLScreenEdgePanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58F3D1E7A8F96009AE51A /* SLScreenEdgePanGestureRecognizer.m */; };
 		DAC58F411E7A8F96009AE51A /* SLSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58F3F1E7A8F96009AE51A /* SLSlideMenu.m */; };
+		DAC5B5FB1EC2A1DC007757AE /* TwoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC5B5FA1EC2A1DC007757AE /* TwoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		DAC58F3D1E7A8F96009AE51A /* SLScreenEdgePanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLScreenEdgePanGestureRecognizer.m; sourceTree = "<group>"; };
 		DAC58F3E1E7A8F96009AE51A /* SLSlideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLSlideMenu.h; sourceTree = "<group>"; };
 		DAC58F3F1E7A8F96009AE51A /* SLSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLSlideMenu.m; sourceTree = "<group>"; };
+		DAC5B5F91EC2A1DC007757AE /* TwoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoViewController.h; sourceTree = "<group>"; };
+		DAC5B5FA1EC2A1DC007757AE /* TwoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,8 @@
 				DA314F9C1E77E8F100526C5C /* AppDelegate.m */,
 				DA314F9E1E77E8F100526C5C /* ViewController.h */,
 				DA314F9F1E77E8F100526C5C /* ViewController.m */,
+				DAC5B5F91EC2A1DC007757AE /* TwoViewController.h */,
+				DAC5B5FA1EC2A1DC007757AE /* TwoViewController.m */,
 				DA314FA11E77E8F100526C5C /* Main.storyboard */,
 				DA314FA41E77E8F100526C5C /* Assets.xcassets */,
 				DA314FA61E77E8F100526C5C /* LaunchScreen.storyboard */,
@@ -249,6 +254,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = DA314F8C1E77E8F000526C5C;
 			productRefGroup = DA314F961E77E8F100526C5C /* Products */;
@@ -297,6 +303,7 @@
 				DA314FA01E77E8F100526C5C /* ViewController.m in Sources */,
 				DA314F9D1E77E8F100526C5C /* AppDelegate.m in Sources */,
 				DAC58F411E7A8F96009AE51A /* SLSlideMenu.m in Sources */,
+				DAC5B5FB1EC2A1DC007757AE /* TwoViewController.m in Sources */,
 				DA314F9A1E77E8F100526C5C /* main.m in Sources */,
 				DAC58F401E7A8F96009AE51A /* SLScreenEdgePanGestureRecognizer.m in Sources */,
 			);

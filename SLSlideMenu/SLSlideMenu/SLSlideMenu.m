@@ -36,8 +36,6 @@
 
 @property (nonatomic, assign) CGFloat shadowY;
 
-
-
 @end
 
 @implementation SLSlideMenu
